@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Students of Colour Collective</title>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background-color: #f0ebe3;
+      font-family: 'Futura', 'Century Gothic', 'Trebuchet MS', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .tape-top {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 26px;
+      background: #b81a1a;
+      background-image: repeating-linear-gradient(
+        90deg, transparent, transparent 40px,
+        rgba(0,0,0,0.07) 40px, rgba(0,0,0,0.07) 41px
+      );
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+    .torn-red-tr {
+      position: fixed;
+      top: -30px; right: -40px;
+      width: 220px; height: 180px;
+      background: #c01c1c;
+      clip-path: polygon(20% 0%, 100% 0%, 100% 60%, 85% 100%, 40% 90%, 0% 50%);
+      opacity: 0.88; z-index: 0;
+      transform: rotate(-6deg);
+    }
+
+    .torn-yellow-tl {
+      position: fixed;
+      top: -20px; left: -50px;
+      width: 230px; height: 170px;
+      background: #e8a020;
+      clip-path: polygon(0% 0%, 70% 0%, 100% 30%, 80% 100%, 20% 85%, 0% 55%);
+      opacity: 0.85; z-index: 0;
+      transform: rotate(10deg);
+    }
+
+    .torn-red-bl {
+      position: fixed;
+      bottom: -20px; left: 5%;
+      width: 180px; height: 80px;
+      background: #b81a1a;
+      clip-path: polygon(0% 30%, 60% 0%, 100% 20%, 90% 100%, 0% 100%);
+      opacity: 0.75; z-index: 0;
+      transform: rotate(-3deg);
+    }
+
+    .torn-yellow-br {
+      position: fixed;
+      bottom: -10px; right: 3%;
+      width: 140px; height: 70px;
+      background: #e8a020;
+      clip-path: polygon(10% 0%, 100% 10%, 100% 100%, 0% 100%, 0% 40%);
+      opacity: 0.70; z-index: 0;
+      transform: rotate(4deg);
+    }
+
+    .card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.94);
+      max-width: 620px;
+      width: 100%;
+      border-radius: 1px;
+      padding: 52px 52px 48px;
+      box-shadow: 5px 5px 0px rgba(0,0,0,0.10), 10px 10px 0px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 16px; bottom: 16px;
+      width: 5px;
+      background: #c01c1c;
+      border-radius: 2px 0 0 2px;
+    }
+
+    .logo-wrap { margin-bottom: 16px; }
+    .logo-wrap img { width: 150px; height: auto; }
+
+    .org-name {
+      font-family: 'League Spartan', sans-serif;
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #111;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .divider {
+      width: 55px; height: 3px;
+      background: #c01c1c;
+      margin: 0 auto 22px;
+      border-radius: 1px;
+    }
+
+    .intro {
+      font-family: 'Futura', 'Century Gothic', 'Trebuchet MS', sans-serif;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #2e2e2e;
+      margin-bottom: 26px;
+      text-align: center;
+      letter-spacing: -0.01em;
+    }
+
+    .construction-box {
+      background: #c01c1c;
+      color: #fff;
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 32px;
+      text-align: center;
+      font-family: 'Futura', 'Century Gothic', 'Trebuchet MS', sans-serif;
+      font-size: 12.5px;
+      line-height: 1.6;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .construction-box strong {
+      display: block;
+      font-size: 13.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 11px 22px;
+      border-radius: 2px;
+      transition: all 0.18s ease;
+      border: 2px solid transparent;
+      text-transform: uppercase;
+    }
+
+    .btn-instagram { background: #c01c1c; color: #fff; border-color: #c01c1c; }
+    .btn-instagram:hover { background: transparent; color: #c01c1c; }
+
+    .btn-linktree { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+    .btn-linktree:hover { background: transparent; color: #1a1a1a; }
+
+    .btn-facebook { background: #e8a020; color: #111; border-color: #e8a020; }
+    .btn-facebook:hover { background: transparent; color: #111; border-color: #e8a020; }
+
+    .btn-email { background: transparent; color: #c01c1c; border-color: #c01c1c; }
+    .btn-email:hover { background: #c01c1c; color: #fff; }
+
+    .icon { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+
+    @media (max-width: 520px) {
+      .card { padding: 38px 28px 36px; }
+      .org-name { font-size: 21px; }
+      .btn { font-size: 12px; padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tape-top"></div>
+  <div class="torn-red-tr"></div>
+  <div class="torn-yellow-tl"></div>
+  <div class="torn-red-bl"></div>
+  <div class="torn-yellow-br"></div>
+
+  <div class="card">
+
+    <div class="logo-wrap">
+      <img src="data:image/png;base64,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" alt="SOCC Logo"/>
+    </div>
+
+    <div class="org-name">Students of Colour Collective</div>
+
+    <div class="divider"></div>
+
+    <p class="intro">
+      The UVSS Students of Colour Collective is a group of self-identified racialized students, (including Black, Indigenous, Asian, Latin American, Middle Eastern, and Pacific Islander communities, among others) operating as an advocacy group out of the University of Victoria, located on Xʷsepsəm, Songhees, and W̱SÁNEĆ territories.<br><br>
+      SOCC serves all students who identify with a visible or invisible ethnic/cultural minority, and works to promote cultural diversity and build community on-campus and in the Greater Victoria Community.
+    </p>
+
+    <div class="construction-box">
+      <strong>Website Under Construction</strong>
+      <span style="font-weight:700;">Launch expected June 2026. Stay tuned through our socials, or find us at the Student Union Building (B120 and B122).</span>
+    </div>
+
+    <div class="buttons">
+
+      <a class="btn btn-instagram" href="https://www.instagram.com/soccollective/" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Instagram
+      </a>
+
+      <a class="btn btn-linktree" href="https://linktr.ee/StudentsofColourCollective" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M7.953 15.066c-.08.163-.08.324-.08.486.08.517.528.894 1.052.814l2.347-.324v4.04c0 .57.484 1.025 1.052 1.025h1.35c.568 0 1.052-.456 1.052-1.025v-4.04l2.347.324c.528.08.972-.297 1.052-.814 0-.162 0-.323-.08-.486L13.93 8.9c-.486-.976-1.863-.976-2.35 0zm2.186-5.9L8.94 11.92l1.54-.213V12a.757.757 0 001.52 0v-.293l1.54.213-2.28-2.754c-.08-.081-.162-.081-.243 0zm7.57-.813l-2.35-3.9a.77.77 0 00-1.052-.243l-2.267 1.378L9.773 4.21a.77.77 0 00-1.052.243L6.37 8.353a.72.72 0 00.243 1.052l1.944 1.214-1.134 2.754a.72.72 0 00.485.893l1.7.405v4.042c0 .568.484 1.025 1.052 1.025h1.35c.568 0 1.052-.457 1.052-1.025v-4.042l1.7-.405a.72.72 0 00.485-.893l-1.134-2.754 1.944-1.214a.72.72 0 00.243-1.052z"/></svg>
+        Linktree
+      </a>
+
+      <a class="btn btn-facebook" href="https://www.facebook.com/soccuvic/" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        Facebook
+      </a>
+
+      <a class="btn btn-email" href="mailto:socc@uvss.ca">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Email Us
+      </a>
+
+    </div>
+  </div>
+
+</body>
+</html>
